@@ -1,0 +1,150 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #e8f4f8;
+  display: flex;
+  justify-content: center;
+  padding: 24px 0;
+  font-family: "Hiragino Sans", "Yu Gothic", "Segoe UI", sans-serif;
+  color: #1a2a3a;
+}
+
+.phone-frame {
+  width: 390px;
+  min-height: 700px;
+  background: #ffffff;
+  border-radius: 32px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+  padding: 40px 24px 32px;
+  overflow: hidden;
+}
+
+.app-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #0d9488;
+}
+
+.app-desc {
+  font-size: 14px;
+  color: #6b8a99;
+  margin-top: 6px;
+  line-height: 1.6;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid #e0eeef;
+  margin: 20px 0;
+}
+
+/* フォーム */
+.form-section h2 {
+  font-size: 15px;
+  color: #0d9488;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid #c8e6e3;
+  border-radius: 12px;
+  font-size: 15px;
+  background: #f6fbfb;
+  color: #1a2a3a;
+  outline: none;
+  font-family: inherit;
+}
+
+.form-input:focus {
+  border-color: #0d9488;
+  background: #ffffff;
+}
+
+.btn-add {
+  width: 100%;
+  padding: 12px;
+  background: #0d9488;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.btn-add:active {
+  background: #0a7c72;
+}
+
+/* アラーム一覧 */
+.list-section h2 {
+  font-size: 15px;
+  color: #0d9488;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.empty-msg {
+  font-size: 14px;
+  color: #a0b8c0;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.alarm-items {
+  list-style: none;
+  padding: 0;
+}
+
+.alarm-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  background: #f0faf9;
+  border-radius: 14px;
+  margin-bottom: 10px;
+}
+
+.alarm-time {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1a2a3a;
+}
+
+.alarm-name {
+  font-size: 13px;
+  color: #6b8a99;
+  margin-top: 2px;
+}
+
+.btn-delete {
+  background: none;
+  border: 1.5px solid #e0eeef;
+  color: #a0b8c0;
+  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.btn-delete:hover {
+  border-color: #e87171;
+  color: #e87171;
+}

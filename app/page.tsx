@@ -23,10 +23,39 @@ export default function Home() {
   }
 
   return (
-    <main style={{ padding: "32px", maxWidth: "480px" }}>
-      <h1>WakePay</h1>
-      <p>早​起きは​三文の​得。​友達と​賭ければ、​な​おお得。​</p>
-      <hr style={{ margin: "24px 0" }} />
+    <main style={{ padding: "32px", maxWidth: "480px", margin: "0 auto" }}>
+      <div style={{ textAlign: "center", marginBottom: "32px" }}>
+        <h1
+          style={{
+            fontFamily: "'Nunito', sans-serif",
+            fontSize: "42px",
+            fontWeight: 900,
+            color: "#3B82F6",
+            letterSpacing: "1px",
+            marginBottom: "12px",
+          }}
+        >
+          WakePay
+        </h1>
+        <p
+          style={{
+            fontFamily: "'Zen Maru Gothic', sans-serif",
+            fontSize: "15px",
+            color: "#2a2a2a",
+            fontWeight: 500,
+            lineHeight: 1.8,
+          }}
+        >
+          早起きは三文の得。友達と賭ければ、なおお得。
+        </p>
+      </div>
+      <hr
+        style={{
+          border: "none",
+          borderTop: "1px solid #e0e0e0",
+          margin: "0 0 24px",
+        }}
+      />
       <AlarmForm onAdd={addAlarm} />
       <AlarmList alarms={alarms} onDelete={deleteAlarm} />
       <AlarmRinger alarms={alarms} />
