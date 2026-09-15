@@ -1,0 +1,32 @@
+{
+  "name": "wakepay",
+  "version": "1.0.0",
+  "description": "二度寝を防止したい、翌日に外せない用事を控える人向けの、WakePayというプロダクトは起床支援アプリです。\r これはお金と友達の目があるから、意志力だけに頼らず確実に起きることができ、既存の目覚ましアプリとは違って\r 前日に友達とお金を賭け合い、起床確認ができなかった人の分を、できた人で分配する仕組みが備わっています。",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yuri12-03/WakePay.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yuri12-03/WakePay/issues"
+  },
+  "homepage": "https://github.com/Yuri12-03/WakePay#readme",
+  "dependencies": {
+    "next": "^16.3.5",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.5.1",
+    "@types/react": "^19.3.0",
+    "typescript": "^7.0.2"
+  }
+}
