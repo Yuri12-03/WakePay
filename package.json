@@ -1,0 +1,16 @@
+{
+  "name": "wakepay",
+  "version": "1.0.0",
+  "description": "二度寝を防止したい、翌日に外せない用事を控える人向けの、WakePayというプロダクトは起床支援アプリです。\r これはお金と友達の目があるから、意志力だけに頼らず確実に起きることができ、既存の目覚ましアプリとは違って\r 前日に友達とお金を賭け合い、起床確認ができなかった人の分を、できた人で分配する仕組みが備わっています。",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tsx": "^4.23.13",
+    "typescript": "^7.0.2"
+  }
+}
