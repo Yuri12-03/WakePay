@@ -21,11 +21,25 @@ export default function AlarmList({ alarms, onDelete }: Props) {
       <h2>登録済みアラーム</h2>
       <ul style={{ listStyle: "none", padding: 0 }}>
         {alarms.map((a) => (
-          <li key={a.id} style={{ marginBottom: "8px", fontSize: "18px" }}>
-            <strong>{a.time}</strong> — {a.name}
+          <li
+            key={a.id}
+            dir="ltr"
+            style={{
+              display: "flex",
+              alignItems: "baseline",
+              gap: "8px",
+              marginBottom: "8px",
+              fontSize: "18px",
+            }}
+          >
+            <strong style={{ flexShrink: 0 }}>{a.time}</strong>
+            <span aria-hidden="true">—</span>
+            <bdi dir="auto" style={{ minWidth: 0, overflowWrap: "anywhere" }}>
+              {a.name}
+            </bdi>
             <button
               onClick={() => onDelete(a.id)}
-              style={{ marginLeft: "12px" }}
+              style={{ flexShrink: 0 }}
             >
               削除
             </button>
