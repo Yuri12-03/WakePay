@@ -5,4 +5,4 @@
 これはお金と友達の目があるから、意志力だけに頼らず確実に起きることができ、既存の目覚ましアプリとは違って
 前日に友達とお金を賭け合い、起床確認ができなかった人の分を、できた人で分配する仕組みが備わっています。
 
-![ポスター](https://chatgpt.com/backend-api/estuary/content?id=file_00000000411c8209a95dc15e7fa045d2&ts=497066&p=fs&cid=1&sig=44d847bcad471dfb8e7db5567bfb10bb314cc3ab4eb8ea594e0f2a816ca80d1b&v=0)
+![ポスター](https://chatgpt.com/s/m_6aa8b36f04408191aee1d0936587ed09)
