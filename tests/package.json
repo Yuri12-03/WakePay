@@ -1,0 +1,13 @@
+{
+  "name": "wakepay-phase2-tests",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test phase2-db.test.mjs",
+    "test:ui": "node phase2-ui.mjs"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.8",
+    "playwright": "^1.63.0"
+  }
+}
