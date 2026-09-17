@@ -17,3 +17,9 @@ export type RoomPreview = {
   can_join: boolean;
   unavailable_reason: UnavailableReason | null;
 };
+
+export type DemoResult = {
+  round: number; user_id: string; can_reset: boolean; complete: boolean;
+  answered: number; total: number; amount: number; pool: number | null; success_count: number;
+  members: { user_id: string; nickname: string; icon: Icon; success: boolean | null; delta: number | null }[];
+};
