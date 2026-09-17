@@ -34,6 +34,10 @@ async function supabase(path: string, init: RequestInit = {}, token?: string) {
       WP_CLIENT_UPGRADE: [409, '画面を再読み込みして、部屋の条件を確認してください。'],
       WP_START_NOT_READY: [409, '全員の参加と同意がそろっていないため、開始できません。'],
       WP_CHECK_DATA_CONFLICT: [409, '起床確認の予定に不整合があります。管理担当者に確認を依頼してください。'],
+      WP_DEMO_NOT_STARTED: [409, '全員が参加してからデモを開始できます。'],
+      WP_DEMO_STALE: [409, 'デモがリセットされました。最新の画面で選び直してください。'],
+      WP_DEMO_ALREADY_ANSWERED: [409, '回答済みです。変更するには作成者がリセットしてください。'],
+      WP_DEMO_OWNER_ONLY: [403, 'リセットできるのは部屋の作成者だけです。'],
       WP_INVALID_INPUT: [400, '入力内容を確認してください。'],
     };
     if (known[data?.message]) throw new ApiError(...known[data.message]);

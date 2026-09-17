@@ -7,6 +7,7 @@ import { api, RequestError } from '../lib/client-api';
 import { formatWakeAt } from '../lib/room-conditions';
 import type { WaitingRoom } from '../lib/types';
 import RoomConditions from './RoomConditions';
+import DemoResults from './DemoResults';
 
 export default function WaitingRoomScreen({ code }: { code: string }) {
   const router = useRouter();
@@ -56,9 +57,10 @@ export default function WaitingRoomScreen({ code }: { code: string }) {
     {data && <>
       <div className="wp-notice"><strong>{ended ? '起床確認の予定時間が終了しました' : remaining > 0 ? '全員そろって、WakePayが開始しました' : '設定した起床時刻になりました'}</strong><p>部屋コード：{data.room.room_code}</p></div>
       <RoomConditions wakeAt={data.room.wake_at} amount={data.room.challenge_amount} />
+      <DemoResults key={code} code={code} />
       {remaining > 0 && <section className="wp-card"><p className="wp-muted">起床まで（サーバー時刻を基準）</p><p className="wp-countdown">{Math.floor(remaining / 86400)}日 {Math.floor(remaining / 3600) % 24}時間 {Math.floor(remaining / 60) % 60}分 {remaining % 60}秒</p></section>}
       <section className="wp-schedule"><h2>あなたの起床確認の予定</h2><ol>{data.checks.map(check => <li key={check.check_number}><strong>{check.check_number}回目</strong><p>{formatWakeAt(check.opens_at)} から<br />{formatWakeAt(check.deadline)} より前まで</p></li>)}</ol></section>
-      <div className="wp-notice"><strong>起床確認・アラーム機能は準備中です</strong><p>現在は予定の確認まで利用できます。音の再生、起床確認の記録、成功・失敗の判定、WP分配はまだ行いません。スマートフォンの通常のアラームを設定してください。</p></div>
+      <div className="wp-notice"><strong>起床確認・アラーム機能は準備中です</strong><p>上のデモは自己申告による体験用です。実際のアラーム、3回の起床確認、起床結果の自動判定はまだ行いません。スマートフォンの通常のアラームを設定してください。</p></div>
       <p className="wp-note">日時はすべて日本時間です。待機情報は5秒おきに更新します。</p>
     </>}
     <footer className="wp-footer">WakePay · 早起きは、みんなで。</footer>

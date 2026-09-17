@@ -237,3 +237,17 @@ body {
 .wp-schedule ol { list-style: none; }
 .wp-schedule li { padding: 16px 0; border-bottom: 1px solid #e4e9e0; }
 .wp-schedule p { font-size: 13px; line-height: 1.8; margin-top: 8px; }
+
+.wp-demo { margin: 24px 0; padding: 20px 16px; border: 2px solid #9abc96; border-radius: 18px; background: #f7faef; }
+.wp-demo h2 { font-size: 21px; margin: 8px 0 12px; }
+.wp-demo h3 { font-size: 16px; margin: 22px 0 12px; }
+.wp-demo-progress { margin: 16px 0; font-weight: 700; font-size: 14px; }
+.wp-demo-actions { display: grid; gap: 10px; }
+.wp-demo-actions .wp-secondary { min-height: 52px; }
+.wp-demo-result ul { list-style: none; }
+.wp-demo-result li { padding: 14px 0; border-bottom: 1px solid #dce7d5; }
+.wp-demo-person { display: flex; align-items: center; gap: 8px; }
+.wp-demo-person strong { font-size: 14px; overflow-wrap: anywhere; min-width: 0; }
+.wp-demo-outcome { display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; font-size: 13px; margin-top: 8px; }
+.wp-demo-outcome b { color: #24483a; font-variant-numeric: tabular-nums; }
+.wp-demo-reset { margin-top: 20px; display: grid; gap: 12px; font-size: 13px; line-height: 1.8; }

@@ -20,6 +20,7 @@ await context.route('**/api/**', async route => {
   if (path === '/api/users') return reply({ user });
   if (path === '/api/rooms' && request.method() === 'POST') { creation = request.postDataJSON(); return reply({ room }, 201); }
   if (path === '/api/rooms') return reply({ rooms: [room] });
+  if (path.endsWith('/demo')) return reply({ round: 1, user_id: user.id, can_reset: true, complete: false, answered: 0, total: 2, amount: 500, pool: null, success_count: 0, members: [{ user_id: user.id, nickname: user.nickname, icon: user.icon, success: null, delta: null }] });
   if (path.endsWith('/waiting')) {
     if (waitingError) return reply({ error: { message: '部屋の参加者のみ閲覧できます。' } }, waitingError);
     return reply({ room, server_now: new Date(serverNow).toISOString(), checks: [1,2,3].map(n => ({ check_number: n, opens_at: new Date(Date.parse(room.wake_at) + (n-1)*600000).toISOString(), deadline: new Date(Date.parse(room.wake_at) + n*600000).toISOString() })) });
