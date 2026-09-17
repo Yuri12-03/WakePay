@@ -48,6 +48,18 @@ export default function PhaseTwo({ screen, code = '' }: { screen: Screen; code?:
       } finally { if (!signal.aborted) setLoading(false); }
       if (!signal.aborted) timer = setTimeout(pollRoom, 5000);
     }
+    async function pollBalance() {
+      try {
+        const result = await api<{ user: User }>('/api/users', undefined, signal);
+        if (!signal.aborted) { setUser(result.user); setError(''); }
+      } catch (err) {
+        if (!signal.aborted) {
+          if (err instanceof RequestError && err.status === 401) { router.replace('/register'); return; }
+          setError('残高を更新できませんでした。表示は最後に取得した残高です。');
+        }
+      }
+      if (!signal.aborted) timer = setTimeout(pollBalance, 3000);
+    }
     async function load() {
       try {
         const result = await api<{ user: User }>('/api/users', undefined, signal);
@@ -56,7 +68,7 @@ export default function PhaseTwo({ screen, code = '' }: { screen: Screen; code?:
         if (screen === 'register' || screen === 'welcome') { router.replace('/home'); return; }
         if (screen === 'home') {
           const list = await api<{ rooms: Room[] }>('/api/rooms', undefined, signal);
-          if (!signal.aborted) setRooms(list.rooms);
+          if (!signal.aborted) { setRooms(list.rooms); timer = setTimeout(pollBalance, 3000); }
         }
         if (screen === 'room') { await pollRoom(); return; }
       } catch (err) {
@@ -109,7 +121,7 @@ export default function PhaseTwo({ screen, code = '' }: { screen: Screen; code?:
           <p className="wp-note">このブラウザに登録情報を保持します。Cookieを削除すると、同じアカウントには戻れません。</p>
         </form>}
         {screen === 'home' && user && <>
-          <div className="wp-profile"><span aria-hidden="true">{ICONS[user.icon] || '☀'}</span><p>友達と早起きの準備をしましょう。</p></div>
+          <div className="wp-profile"><span aria-hidden="true">{ICONS[user.icon] || '☀'}</span><p>残高<br /><strong className="wp-balance">{typeof user.balance === 'number' ? `${user.balance.toLocaleString('ja-JP')} WP` : '取得できません（DB更新を確認）'}</strong></p></div>
           <Link className="wp-action" href="/create-room"><span className="wp-action-icon" aria-hidden="true">＋</span><div><h2>WakePayを作成する</h2><p>新しい部屋に友達を招待</p></div><span aria-hidden="true">→</span></Link>
           <Link className="wp-action" href="/join-room"><span className="wp-action-icon" aria-hidden="true">⌗</span><div><h2>部屋コードで参加する</h2><p>友達から届いたコードを入力</p></div><span aria-hidden="true">→</span></Link>
           <section className="wp-room-list"><h2>参加中のWakePay</h2>{rooms.length === 0 ? <p className="wp-muted">まだ参加中の部屋はありません。</p> : rooms.map(room => <Link href={`/room/${room.room_code}`} className="wp-room-link" key={room.id}><strong>{room.group_name}</strong><span>{room.room_code} →</span></Link>)}</section>

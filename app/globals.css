@@ -250,4 +250,4 @@ body {
 .wp-demo-person strong { font-size: 14px; overflow-wrap: anywhere; min-width: 0; }
 .wp-demo-outcome { display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; font-size: 13px; margin-top: 8px; }
 .wp-demo-outcome b { color: #24483a; font-variant-numeric: tabular-nums; }
-.wp-demo-reset { margin-top: 20px; display: grid; gap: 12px; font-size: 13px; line-height: 1.8; }
+.wp-demo-reset { margin-top: 20px; display: grid; gap: 12px; font-size: 13px; line-height: 1.8; }.wp-balance { font-size: 20px; font-weight: 700; line-height: 1.8; font-variant-numeric: tabular-nums; }

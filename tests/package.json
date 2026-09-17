@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test phase2-db.test.mjs phase25-db.test.mjs phase3-db.test.mjs demo-db.test.mjs phase25-validation.test.mjs room-rpc-result.test.mjs",
+    "test": "node --test phase2-db.test.mjs phase25-db.test.mjs phase3-db.test.mjs demo-db.test.mjs balance-db.test.mjs phase25-validation.test.mjs room-rpc-result.test.mjs",
     "test:ui": "node phase25-ui.mjs",
     "test:ui:phase3": "node phase3-ui.mjs",
     "test:ui:demo": "node demo-ui.mjs"
