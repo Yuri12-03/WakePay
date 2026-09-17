@@ -15,7 +15,8 @@ function result(user) {
   const complete = answers.size === users.length;
   const winners = [...answers].filter(([, success]) => success).map(([id]) => id);
   const pool = [...answers.values()].filter(x => !x).length * 101;
-  return { round, user_id: user.id, can_reset: user.id === 'u0', complete, answered: answers.size, total: 3, amount: 101, pool: complete ? pool : null, success_count: winners.length,
+  const ownDelta = !complete ? 0 : !answers.get(user.id) ? -101 : Math.floor(pool / winners.length) + (user.id === winners[0] ? pool % winners.length : 0);
+  return { balance: 2000 + ownDelta, balance_applied: complete, round, user_id: user.id, can_reset: user.id === 'u0', complete, answered: answers.size, total: 3, amount: 101, pool: complete ? pool : null, success_count: winners.length,
     members: users.map(u => ({ user_id: u.id, nickname: u.nickname, icon: u.icon, success: answers.get(u.id) ?? null,
       delta: !complete ? null : !answers.get(u.id) ? -101 : Math.floor(pool / winners.length) + (u.id === winners[0] ? pool % winners.length : 0) })) };
 }
@@ -37,7 +38,8 @@ try {
         }
         return reply(result(user));
       }
-      if (path === '/api/users') return reply({ user });
+      if (path === '/api/users') return reply({ user: { ...user, balance: result(user).balance } });
+      if (path === '/api/rooms') return reply({ rooms: [room] });
       return reply({ room, members: [] });
     });
     const page = await context.newPage(); page.on('pageerror', e => errors.push(e.message));
@@ -58,6 +60,8 @@ try {
     assert.deepEqual(await page.locator('.wp-demo-outcome b').allTextContents(), ['+51 WP', '+50 WP', '-101 WP']);
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
   }
+  const home = await owner.context().newPage(); await home.goto(base + '/home');
+  await home.getByText('2,051 WP', { exact: true }).waitFor();
   await mkdir(new URL('./artifacts/demo/', import.meta.url), { recursive: true });
   await owner.screenshot({ path: fileURLToPath(new URL('./artifacts/demo/results.png', import.meta.url)), fullPage: true });
   await owner.getByRole('button', { name: '結果をリセットする', exact: true }).click();
@@ -66,6 +70,7 @@ try {
   await owner.getByRole('button', { name: '全員の結果をリセットする', exact: true }).click();
   for (const page of pages) { await page.getByRole('button', { name: '起きられた', exact: true }).waitFor({ timeout: 10000 }); }
   assert.equal(round, 2); assert.equal(answers.size, 0);
+  await home.getByText('2,000 WP', { exact: true }).waitFor({ timeout: 10000 });
   for (const page of pages) await page.getByRole('button', { name: '起きられなかった', exact: true }).click();
   await owner.getByText('全員失敗のため、全員が設定ポイントを失い、分配はありません。', { exact: true }).waitFor({ timeout: 10000 });
   assert.deepEqual(await owner.locator('.wp-demo-outcome b').allTextContents(), ['-101 WP', '-101 WP', '-101 WP']);

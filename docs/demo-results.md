@@ -38,3 +38,5 @@ Supabase SQL Editorで `supabase/demo-results.sql` の全文を実行してく�
 本番サーバーを3211番で起動し `npm.cmd run test:ui:demo --prefix tests` で画面を確認します。画面テストは共有状態を持つAPIテストデータを使用し、共有DBへの書き込みは行いません。実Supabaseでの端末間同期・複数DB接続の同時処理はSQL適用後に確認してください。
 
 画面検証結果：Edgeの独立した3ブラウザコンテキスト・390px幅で、回答共有、+51/+50/-101 WPの分配、再読み込み、リセット・取り消し、全員失敗、SQL未適用時のエラーからの復帰が成功しました。既存のフェーズ3画面テストも成功。スクリーンショットは tests/artifacts/demo/results.png に保存（Git対象外）。
+
+残高連動を追加しました。初期残高2,000 WP、確定時の反映、リセット時の取り消しについては [ポイント残高](point-balances.md) を参照し、point-balances.sqlをこのSQLの後に適用してください。
