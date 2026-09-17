@@ -33,7 +33,13 @@ export default function PhaseTwo({ screen, code = '' }: { screen: Screen; code?:
     async function pollRoom() {
       try {
         const result = await api<RoomDetail>(`/api/rooms/${encodeURIComponent(code)}`, undefined, signal);
-        if (!signal.aborted) { setDetail(result); setError(''); }
+        if (!signal.aborted) {
+          if (['active', 'finished'].includes(result.room.status)) {
+            router.replace(`/room/${result.room.room_code}/waiting`);
+            return;
+          }
+          setDetail(result); setError('');
+        }
       } catch (err) {
         if (signal.aborted) return;
         if (err instanceof RequestError && err.status === 401) { router.replace('/register'); return; }
@@ -114,7 +120,7 @@ export default function PhaseTwo({ screen, code = '' }: { screen: Screen; code?:
           <RoomConditions wakeAt={detail.room.wake_at} amount={detail.room.challenge_amount} />
           <div className="wp-code-card"><p>友達にこのコードをシェア</p><strong>{detail.room.room_code}</strong><button className="wp-secondary" onClick={async () => { try { await navigator.clipboard.writeText(detail.room.room_code); setCopied('コピーしました'); } catch { setCopied('コピーできませんでした。コードを選択してコピーしてください。'); } }}>コードをコピー</button><span className="wp-note" role="status">{copied}</span></div>
           <section className="wp-members"><div className="wp-section-title"><h2>参加メンバー</h2><span>{detail.members.length} / {detail.room.max_members}人</span></div><ul>{detail.members.map(member => <li key={member.id}><span className="wp-avatar" aria-hidden="true">{ICONS[member.user.icon] || '☀'}</span><strong>{member.user.nickname}{member.user_id === user.id && <small>（あなた）</small>}</strong>{member.user_id === detail.room.creator_id && <span className="wp-badge">作成者</span>}</li>)}</ul></section>
-          <div className="wp-notice"><strong>{!detail.room.wake_at ? '条件が未設定の部屋です' : detail.room.status === 'ready' ? '全員そろいました！' : detail.room.status !== 'waiting' ? '参加受付は終了しました' : Date.parse(detail.room.wake_at) <= Date.now() ? '参加受付の期限を過ぎました' : '友達の参加を待っています'}</strong><p>{!detail.room.wake_at ? '新しく条件を決めて、別の部屋を作成してください。この部屋の条件は変更できません。' : detail.room.status === 'ready' ? '全員の参加と条件への同意が完了しました。自動開始・アラーム機能は現在準備中です。' : detail.room.status !== 'waiting' ? 'この部屋の参加受付は終了しています。' : Date.parse(detail.room.wake_at) <= Date.now() ? '人数がそろわなかったため、チャレンジは成立していません。WPの増減はありません。' : '部屋コードを共有して、みんなを招待しましょう。'}</p></div>
+          <div className="wp-notice"><strong>{!detail.room.wake_at ? '条件が未設定の部屋です' : detail.room.status === 'ready' ? '全員そろいました！' : detail.room.status !== 'waiting' ? '参加受付は終了しました' : Date.parse(detail.room.wake_at) <= Date.now() ? '参加受付の期限を過ぎました' : '友達の参加を待っています'}</strong><p>{!detail.room.wake_at ? '新しく条件を決めて、別の部屋を作成してください。この部屋の条件は変更できません。' : detail.room.status === 'ready' ? '全員の参加と同意は完了していますが、開始が完了していません。管理担当者に確認してください。' : detail.room.status !== 'waiting' ? 'この部屋の参加受付は終了しています。' : Date.parse(detail.room.wake_at) <= Date.now() ? '人数がそろわなかったため、チャレンジは成立していません。WPの増減はありません。' : '部屋コードを共有して、みんなを招待しましょう。'}</p></div>
           <p className="wp-note">参加状況は5秒おきに自動更新されます。</p>
         </>}
       </>}

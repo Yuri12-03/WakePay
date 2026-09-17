@@ -51,8 +51,8 @@ export default function RoomCreateForm() {
     <p className="wp-note">あなたを含めた人数です。</p>
     <label className="wp-label" htmlFor="wake-date">起床日 <span>日本時間</span></label>
     <input id="wake-date" type="date" min={today} max="9999-12-31" value={wakeDate} onChange={e => setWakeDate(e.target.value)} required disabled={busy} />
-    <label className="wp-label" htmlFor="wake-time">起床時刻 <span>04:00〜11:00</span></label>
-    <input id="wake-time" type="time" min="04:00" max="11:00" step={60} value={wakeTime} onChange={e => setWakeTime(e.target.value)} required disabled={busy} />
+    <label className="wp-label" htmlFor="wake-time">起床時刻 <span>24時間から選択</span></label>
+    <input id="wake-time" type="time" step={60} value={wakeTime} onChange={e => setWakeTime(e.target.value)} required disabled={busy} />
     <label className="wp-label" htmlFor="amount">チャレンジ金額 <span>100〜2000 WP</span></label>
     <input id="amount" type="number" inputMode="numeric" min={100} max={2000} step={1} value={amount} onChange={e => setAmount(e.target.value)} placeholder="例：500" required disabled={busy} />
     {conditions && <RoomConditions wakeAt={conditions.wake_at} amount={conditions.challenge_amount} />}
