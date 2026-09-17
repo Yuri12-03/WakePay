@@ -1,7 +1,7 @@
 export const MIN_AMOUNT = 100;
 export const MAX_AMOUNT = 2000;
-export const MIN_WAKE_TIME = '04:00';
-export const MAX_WAKE_TIME = '11:00';
+export const MIN_WAKE_TIME = '00:00';
+export const MAX_WAKE_TIME = '23:59';
 
 export function japanDate(now = new Date()): string {
   return new Date(now.getTime() + 9 * 60 * 60 * 1000).toISOString().slice(0, 10);
@@ -25,7 +25,7 @@ export function creationConditions(input: Record<string, unknown>, now = new Dat
   if (!isCalendarDate(input.wake_date)) throw new Error('起床日を正しい日付で選択してください。');
   const time = input.wake_time;
   if (typeof time !== 'string' || !/^\d{2}:[0-5]\d$/.test(time) || time < MIN_WAKE_TIME || time > MAX_WAKE_TIME) {
-    throw new Error('起床時刻は04:00〜11:00の間で、1分単位で選択してください。');
+    throw new Error('起床時刻は00:00〜23:59の間で、1分単位で選択してください。');
   }
   const wakeAt = new Date(`${input.wake_date}T${time}:00+09:00`);
   if (wakeAt.getTime() <= now.getTime()) throw new Error('起床日時は現在より未来の日時を選択してください。');

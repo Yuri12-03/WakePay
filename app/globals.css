@@ -232,3 +232,8 @@ body {
 .wp-preview .wp-primary { margin-top: 18px; }
 .wp-decline { width: 100%; min-height: 48px; margin-top: 12px; }
 .wp-join-error { margin-top: 20px; }
+.wp-countdown { font-size: 20px; font-weight: 700; line-height: 1.8; font-variant-numeric: tabular-nums; }
+.wp-schedule h2 { font-size: 16px; margin-bottom: 14px; }
+.wp-schedule ol { list-style: none; }
+.wp-schedule li { padding: 16px 0; border-bottom: 1px solid #e4e9e0; }
+.wp-schedule p { font-size: 13px; line-height: 1.8; margin-top: 8px; }

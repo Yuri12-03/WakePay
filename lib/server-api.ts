@@ -32,6 +32,8 @@ async function supabase(path: string, init: RequestInit = {}, token?: string) {
       WP_ACCEPTANCE_REQUIRED: [400, '部屋の条件を確認して、参加に同意してください。'],
       WP_CONDITIONS_IMMUTABLE: [409, '作成後の部屋の条件は変更できません。'],
       WP_CLIENT_UPGRADE: [409, '画面を再読み込みして、部屋の条件を確認してください。'],
+      WP_START_NOT_READY: [409, '全員の参加と同意がそろっていないため、開始できません。'],
+      WP_CHECK_DATA_CONFLICT: [409, '起床確認の予定に不整合があります。管理担当者に確認を依頼してください。'],
       WP_INVALID_INPUT: [400, '入力内容を確認してください。'],
     };
     if (known[data?.message]) throw new ApiError(...known[data.message]);

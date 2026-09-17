@@ -105,7 +105,7 @@ try {
   assert.equal(await owner.page.getByLabel('チャレンジ金額').evaluate(e => e.validity.rangeUnderflow), true);
   await owner.page.getByLabel('チャレンジ金額').fill('500');
   await owner.page.getByLabel('起床時刻').fill('11:01');
-  await owner.page.getByRole('button', { name: 'この条件で部屋を作成して参加する' }).click();
+  assert.equal(await owner.page.getByLabel('起床時刻').evaluate(e => e.validity.valid), true);
   assert.equal(creates, 0);
   await owner.page.getByLabel('起床時刻').fill('07:00');
   await screenshot(owner.page, 'create-conditions');
