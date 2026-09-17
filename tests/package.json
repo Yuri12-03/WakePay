@@ -3,8 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test phase2-db.test.mjs",
-    "test:ui": "node phase2-ui.mjs"
+    "test": "node --test phase2-db.test.mjs phase25-db.test.mjs phase25-validation.test.mjs room-rpc-result.test.mjs",
+    "test:ui": "node phase25-ui.mjs"
   },
   "devDependencies": {
     "@electric-sql/pglite": "^0.5.8",

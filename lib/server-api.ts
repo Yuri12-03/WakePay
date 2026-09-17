@@ -26,11 +26,17 @@ async function supabase(path: string, init: RequestInit = {}, token?: string) {
       WP_NOT_MEMBER: [403, '部屋コードを入力して参加してください。'],
       WP_ROOM_FULL: [409, 'この部屋は満員です。'],
       WP_ROOM_CLOSED: [409, 'この部屋の参加受付は終了しています。'],
+      WP_ROOM_EXPIRED: [409, '起床日時を過ぎているため、この部屋には参加できません。'],
+      WP_CONDITIONS_MISSING: [409, 'この部屋は条件が未設定です。新しい部屋を作成してください。'],
+      WP_CONDITIONS_CHANGED: [409, '表示していた条件と一致しません。部屋の条件をもう一度確認してください。'],
+      WP_ACCEPTANCE_REQUIRED: [400, '部屋の条件を確認して、参加に同意してください。'],
+      WP_CONDITIONS_IMMUTABLE: [409, '作成後の部屋の条件は変更できません。'],
+      WP_CLIENT_UPGRADE: [409, '画面を再読み込みして、部屋の条件を確認してください。'],
       WP_INVALID_INPUT: [400, '入力内容を確認してください。'],
     };
     if (known[data?.message]) throw new ApiError(...known[data.message]);
     if (data?.error_code === 'anonymous_provider_disabled') throw new ApiError(503, '登録の準備中です。Supabaseで匿名サインインを有効にしてください。');
-    if (data?.code === 'PGRST202' || data?.code === '42501') throw new ApiError(503, 'データベースの準備中です。フェーズ2用SQLの適用を確認してください。');
+    if (data?.code === 'PGRST202' || data?.code === '42501') throw new ApiError(503, 'データベースの準備中です。必要な移行SQLの適用を確認してください。');
     if (response.status === 401 || response.status === 403) throw new ApiError(401, 'セッションの有効期限が切れました。もう一度登録してください。');
     if (response.status === 429) throw new ApiError(429, '操作が集中しています。しばらく待ってからお試しください。');
     throw new ApiError(502, 'データを処理できませんでした。接続設定を確認して再度お試しください。');
